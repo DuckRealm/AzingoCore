@@ -2,8 +2,6 @@ package eu.duckrealm.azingoCore.listeners;
 
 import eu.duckrealm.azingoCore.AzingoCore;
 import eu.duckrealm.azingoCore.util.DeathInventoryManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemDisplay;
@@ -38,7 +36,7 @@ public class PlayerMoveListener implements Listener {
                         DeathInventoryManager.removeInventory(inventoryUUID);
                         return;
                     }
-                    
+
                     //xp = "level:progress"
                     int level = Integer.parseInt(xp.split(":")[0]);
                     float progress = Float.parseFloat(xp.split(":")[1]);

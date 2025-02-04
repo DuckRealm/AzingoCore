@@ -1,7 +1,6 @@
 package eu.duckrealm.azingoCore.commands;
 
 import eu.duckrealm.azingoCore.AzingoCore;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

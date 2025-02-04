@@ -1,6 +1,5 @@
 package eu.duckrealm.azingoCore.commands;
 
-import eu.duckrealm.azingoCore.AzingoCore;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
