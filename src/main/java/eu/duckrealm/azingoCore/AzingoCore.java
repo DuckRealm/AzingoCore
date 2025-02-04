@@ -4,6 +4,7 @@ import eu.duckrealm.azingoCore.commands.BalanceCommand;
 import eu.duckrealm.azingoCore.commands.DiscordCommand;
 import eu.duckrealm.azingoCore.commands.PayCommand;
 import eu.duckrealm.azingoCore.listeners.PlayerDeathListener;
+import eu.duckrealm.azingoCore.listeners.PlayerMoveListener;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandExecutor;
@@ -22,6 +23,7 @@ public final class AzingoCore extends JavaPlugin {
         registerCommand("pay", new PayCommand());
 
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
     }
 
     @Override
