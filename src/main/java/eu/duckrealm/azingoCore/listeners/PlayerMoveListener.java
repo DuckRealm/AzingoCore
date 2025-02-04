@@ -18,7 +18,7 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        event.getPlayer().getNearbyEntities(5, 5, 5).stream()
+        event.getPlayer().getNearbyEntities(2, 2, 2).stream()
                 .filter(entity -> entity.getType().equals(EntityType.ITEM_DISPLAY))
                 .map(entity -> (ItemDisplay) entity)
                 .forEach(entity -> {
