@@ -17,3 +17,27 @@ commands:
     description: 'Pay command'
     usage: '/pay <player> <amount>'
     permission: 'azingocore.pay'
+  lock:
+    description: 'Locks the server for events'
+    usage: '/lock'
+    permission: 'azingocore.op.lock'
+  unlock:
+    description: 'Unlocks the server after events'
+    usage: '/unlock'
+    permission: 'azingocore.op.lock'
+permissions:
+  azingocore.discord:
+    description: 'Allows the player to use the discord command'
+    default: true
+  azingocore.balance:
+    description: 'Allows the player to use the balance command'
+    default: true
+  azingocore.pay:
+    description: 'Allows the player to use the pay command'
+    default: true
+  azingocore.op.lock:
+    description: 'Allows the player to use the lock and unlock commands'
+    default: op
+  azingocore.op.bypasslock:
+    description: 'Allows the player to bypass the lock'
+    default: op
