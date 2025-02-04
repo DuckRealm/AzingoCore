@@ -11,7 +11,7 @@ public class DiscordCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
-        commandSender.sendMessage(AzingoCore.parseMinimessage("<green>Join our Discord: </green><u><blue>https://discord.gg/MSn8Rk68D2</blue></u>"));
+        commandSender.sendMessage(AzingoCore.parseMinimessage("<green>Join our Discord: </green><u><blue><click:open_url:'https://discord.gg/MSn8Rk68D2'>https://discord.gg/MSn8Rk68D2</click></blue></u>"));
         return true;
     }
 }
