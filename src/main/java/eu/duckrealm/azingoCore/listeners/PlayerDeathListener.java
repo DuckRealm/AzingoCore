@@ -21,6 +21,7 @@ public class PlayerDeathListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         Location deathLocation = player.getLocation().clone().add(0, 1, 0);
+        deathLocation.setPitch(0);
 
         player.sendMessage(AzingoCore.parseMinimessage("<red>You died at <gold><u>" + deathLocation.getBlockX() + "</u> <u>" + deathLocation.getBlockY() + "</u> <u>" + deathLocation.getBlockZ() + "</u></gold>"));
 
