@@ -8,6 +8,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +18,7 @@ import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerDeathListener implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         Location deathLocation = player.getLocation().clone().add(0, 1, 0);
@@ -26,7 +27,7 @@ public class PlayerDeathListener implements Listener {
         player.sendMessage(AzingoCore.parseMinimessage("<red>You died at <gold><u>" + deathLocation.getBlockX() + "</u> <u>" + deathLocation.getBlockY() + "</u> <u>" + deathLocation.getBlockZ() + "</u></gold>"));
 
         event.setShouldDropExperience(false);
-        event.setKeepInventory(true);
+        event.getDrops().clear();
 
         deathLocation.getWorld().spawn(deathLocation, ItemDisplay.class, entity -> {
             ItemStack head = new ItemStack(Material.PLAYER_HEAD);
@@ -36,7 +37,7 @@ public class PlayerDeathListener implements Listener {
             entity.setItemStack(head);
 
             PersistentDataContainer container = entity.getPersistentDataContainer();
-            container.set(new NamespacedKey(AzingoCore.instance, "XP"), PersistentDataType.INTEGER, player.getTotalExperience());
+            container.set(new NamespacedKey(AzingoCore.instance, "XP"), PersistentDataType.STRING, player.getLevel() + ":" + player.getExp());
 
             String inventory = DeathInventoryManager.addInventory(player.getInventory().getContents());
             container.set(new NamespacedKey(AzingoCore.instance, "INVENTORY"), PersistentDataType.STRING, inventory);

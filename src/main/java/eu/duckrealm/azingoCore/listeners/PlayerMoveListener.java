@@ -28,8 +28,9 @@ public class PlayerMoveListener implements Listener {
 
                     String inventoryUUID = entity.getPersistentDataContainer().get(new NamespacedKey(AzingoCore.instance, "INVENTORY"), PersistentDataType.STRING);
                     ItemStack[] inventory = DeathInventoryManager.getInventory(inventoryUUID);
-                    player.getInventory().setContents(inventory);
-                    Integer xp = entity.getPersistentDataContainer().get(new NamespacedKey(AzingoCore.instance, "XP"), PersistentDataType.INTEGER);
+                    if(inventory != null) player.getInventory().setContents(inventory);
+                    String xp = entity.getPersistentDataContainer().get(new NamespacedKey(AzingoCore.instance, "XP"), PersistentDataType.STRING);
+
                     if(xp == null) {
                         AzingoCore.instance.getLogger().severe("XP not found for player " + player.getName() + " " + player.getLocation());
                         player.sendMessage(AzingoCore.parseMinimessage("<red>Something went wrong. Please report to an admin."));
@@ -37,8 +38,13 @@ public class PlayerMoveListener implements Listener {
                         DeathInventoryManager.removeInventory(inventoryUUID);
                         return;
                     }
-                    player.setTotalExperience(xp);
-
+                    
+                    //xp = "level:progress"
+                    int level = Integer.parseInt(xp.split(":")[0]);
+                    float progress = Float.parseFloat(xp.split(":")[1]);
+                    player.setLevel(level);
+                    player.setExp(progress);
+                    player.playSound(player.getLocation(), "minecraft:entity.player.levelup", 1, 1);
                     entity.remove();
                     DeathInventoryManager.removeInventory(inventoryUUID);
                 });
