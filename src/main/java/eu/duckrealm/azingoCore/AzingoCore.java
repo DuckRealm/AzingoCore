@@ -10,6 +10,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.nio.file.Path;
 import java.util.Objects;
 
 public final class AzingoCore extends JavaPlugin {
@@ -37,5 +38,9 @@ public final class AzingoCore extends JavaPlugin {
 
     public static Component parseMinimessage(String message) {
         return MiniMessage.miniMessage().deserialize(message);
+    }
+
+    public static Path getPath() {
+        return instance.getDataFolder().toPath();
     }
 }

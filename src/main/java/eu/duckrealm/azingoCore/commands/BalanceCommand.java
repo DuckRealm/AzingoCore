@@ -1,6 +1,7 @@
 package eu.duckrealm.azingoCore.commands;
 
 import eu.duckrealm.azingoCore.AzingoCore;
+import eu.duckrealm.azingoCore.util.XPHelper;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,8 +16,8 @@ public class BalanceCommand implements CommandExecutor {
             return true;
         }
 
-        int balance = player.getTotalExperience();
-        player.sendMessage(AzingoCore.parseMinimessage("<green>Your balance is: <gold><u>" + balance + "</u> XP</gold></green>"));
+        double balance = XPHelper.getPoints(player);
+        player.sendMessage(AzingoCore.parseMinimessage("<green>Your balance is: <gold><u>" + Math.round(balance) + "</u> XP</gold></green>"));
         return true;
     }
 }

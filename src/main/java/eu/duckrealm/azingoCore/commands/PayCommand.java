@@ -1,5 +1,6 @@
 package eu.duckrealm.azingoCore.commands;
 
+import eu.duckrealm.azingoCore.util.XPHelper;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,6 +28,11 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
+        if(target.equals(player)) {
+            player.sendMessage(parseMinimessage("<red>You can't pay yourself."));
+            return true;
+        }
+
         int amount;
         try {
             amount = Integer.parseInt(strings[1]);
@@ -40,13 +46,15 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
-        if(player.getTotalExperience() < amount) {
+        if(XPHelper.getPoints(player) < amount) {
             player.sendMessage(parseMinimessage("<red>You don't have enough XP."));
             return true;
         }
 
         player.giveExp(-amount);
+        player.sendMessage(parseMinimessage("<green>You paid <red><u>" + amount + "</u> XP</red> to <aqua><u>" + target.getName() + "</u></aqua>"));
         target.giveExp(amount);
+        target.sendMessage(parseMinimessage("<green>You received <red><u>" + amount + "</u> XP</red> from <aqua><u>" + player.getName() + "</u></aqua>"));
         return true;
     }
 }

@@ -1,7 +1,7 @@
 package eu.duckrealm.azingoCore.listeners;
 
 import eu.duckrealm.azingoCore.AzingoCore;
-import eu.duckrealm.azingoCore.util.DeathInventoryManager;
+import eu.duckrealm.azingoCore.util.Serializer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,7 +20,7 @@ public class PlayerDeathListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        Location deathLocation = player.getLocation().clone().add(0, 1, 0);
+        Location deathLocation = player.getLocation().clone().add(0, 2, 0);
         deathLocation.setPitch(0);
 
         player.sendMessage(AzingoCore.parseMinimessage("<red>You died at <gold><u>" + deathLocation.getBlockX() + "</u> <u>" + deathLocation.getBlockY() + "</u> <u>" + deathLocation.getBlockZ() + "</u></gold>"));
@@ -38,7 +38,7 @@ public class PlayerDeathListener implements Listener {
             PersistentDataContainer container = entity.getPersistentDataContainer();
             container.set(new NamespacedKey(AzingoCore.instance, "XP"), PersistentDataType.STRING, player.getLevel() + ":" + player.getExp());
 
-            String inventory = DeathInventoryManager.addInventory(player.getInventory().getContents());
+            String inventory = Serializer.serializeItemStackArray(player.getInventory().getContents());
             container.set(new NamespacedKey(AzingoCore.instance, "INVENTORY"), PersistentDataType.STRING, inventory);
 
             container.set(new NamespacedKey(AzingoCore.instance, "PLAYER"), PersistentDataType.STRING, player.getUniqueId().toString());

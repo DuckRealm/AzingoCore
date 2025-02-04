@@ -1,7 +1,7 @@
 package eu.duckrealm.azingoCore.listeners;
 
 import eu.duckrealm.azingoCore.AzingoCore;
-import eu.duckrealm.azingoCore.util.DeathInventoryManager;
+import eu.duckrealm.azingoCore.util.Serializer;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemDisplay;
@@ -24,8 +24,8 @@ public class PlayerMoveListener implements Listener {
 
                     if(!player.getUniqueId().toString().equals(playerUUID)) return;
 
-                    String inventoryUUID = entity.getPersistentDataContainer().get(new NamespacedKey(AzingoCore.instance, "INVENTORY"), PersistentDataType.STRING);
-                    ItemStack[] inventory = DeathInventoryManager.getInventory(inventoryUUID);
+                    String serializedInventory = entity.getPersistentDataContainer().get(new NamespacedKey(AzingoCore.instance, "INVENTORY"), PersistentDataType.STRING);
+                    ItemStack[] inventory = Serializer.deserializeItemStackArray(serializedInventory);
                     if(inventory != null) player.getInventory().setContents(inventory);
                     String xp = entity.getPersistentDataContainer().get(new NamespacedKey(AzingoCore.instance, "XP"), PersistentDataType.STRING);
 
@@ -33,7 +33,6 @@ public class PlayerMoveListener implements Listener {
                         AzingoCore.instance.getLogger().severe("XP not found for player " + player.getName() + " " + player.getLocation());
                         player.sendMessage(AzingoCore.parseMinimessage("<red>Something went wrong. Please report to an admin."));
                         entity.remove();
-                        DeathInventoryManager.removeInventory(inventoryUUID);
                         return;
                     }
 
@@ -44,7 +43,6 @@ public class PlayerMoveListener implements Listener {
                     player.setExp(progress);
                     player.playSound(player.getLocation(), "minecraft:entity.player.levelup", 1, 1);
                     entity.remove();
-                    DeathInventoryManager.removeInventory(inventoryUUID);
                 });
     }
 }
