@@ -1,0 +1,10 @@
+name: AzingoCore
+version: '1.0'
+main: eu.duckrealm.azingoCore.AzingoCore
+api-version: '1.21'
+commands:
+  discord:
+    description: 'Discord command'
+    usage: '/discord'
+    aliases: [dc]
+    permission: 'azingocore.discord'
