@@ -8,3 +8,12 @@ commands:
     usage: '/discord'
     aliases: [dc]
     permission: 'azingocore.discord'
+  balance:
+    description: 'Balance command'
+    usage: '/balance'
+    aliases: [bal]
+    permission: 'azingocore.balance'
+  pay:
+    description: 'Pay command'
+    usage: '/pay <player> <amount>'
+    permission: 'azingocore.pay'
